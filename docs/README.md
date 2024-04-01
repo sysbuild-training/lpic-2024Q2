@@ -3,7 +3,7 @@
 
 ## 演習で使うスクリプトやワークシート
 
-- [www.py](www.py)
+- [www.py](dist/www.py)
 
 
 ## テキスト
