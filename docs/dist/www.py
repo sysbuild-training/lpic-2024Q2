@@ -10,8 +10,8 @@
 #    web: https://www.fml.org/
 # github: https://github.com/fmlorg
 #
-# $FML: www.py,v 1.59 2024/04/06 02:21:14 fukachan Exp $
-# $Revision: 1.59 $
+# $FML: www.py,v 1.60 2024/04/21 10:54:16 fukachan Exp $
+# $Revision: 1.60 $
 #        NAME: www.py
 # DESCRIPTION: a standalone web server based on python3 modules,
 #              which is used as a template for our system build exercises.
@@ -184,6 +184,9 @@ class wwwpyUtils:
 # MAIN
 #
 if __name__ == "__main__":
+   # not recommended but may be allowed since this practice is for personal use only.
+   socketserver.TCPServer.allow_reuse_address = True
+
    # run python www server (httpd)
    with socketserver.TCPServer((HTTP_HOST, HTTP_PORT), httpHandler) as httpd:
       print("(debug) serving at port", HTTP_PORT, file=sys.stderr)
