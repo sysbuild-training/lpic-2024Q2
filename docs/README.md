@@ -4,6 +4,11 @@
 ## 演習で使うスクリプトやワークシート
 
 - [www.py](dist/www.py)
+- 構成図のテンプレート
+    - [ODG (LibreOffice draw format)](dist/templates/www-design-template.odg)
+    - [SVG](dist/templates/www-design-template.svg)
+    - [PNG](dist/templates/www-design-template.png)
+    - [PDF](dist/templates/www-design-template.pdf)
 
 
 ## テキスト(PDF)
