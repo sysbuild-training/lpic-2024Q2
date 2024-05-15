@@ -20,9 +20,4 @@
     - 付録(P.63 -)はWebinarでは使いません(たぶん付録の項目の紹介だけします)
 
 
-## 位置づけ
 
-以下の図は、情報システム工学科3年生のITインフラストラクチャ関連の演習の通年構成です。 
-この演習は科目(1)(2)(3)のダイジェストにあたります
-
-![](https://unix-entrance.fml.org/slides/syllabus/sysbuild/2023/images/lecture-series_B3.png)
