@@ -1,0 +1,205 @@
+0001 #!/usr/bin/python3
+0002 # -*- utf-8 -*-
+0003 #
+0004 # Copyright (C) 2021-2023 Ken'ichi Fukamachi
+0005 #   All rights reserved. This program is free software; you can
+0006 #   redistribute it and/or modify it under 2-Clause BSD License.
+0007 #   https://opensource.org/licenses/BSD-2-Clause
+0008 #
+0009 # mailto: fukachan@fml.org
+0010 #    web: https://www.fml.org/
+0011 # github: https://github.com/fmlorg
+0012 #
+0013 # $FML: www.py,v 1.60 2024/04/21 10:54:16 fukachan Exp $
+0014 # $Revision: 1.60 $
+0015 #        NAME: www.py
+0016 # DESCRIPTION: a standalone web server based on python3 modules,
+0017 #              which is used as a template for our system build exercises.
+0018 #              See https://sysbuild-entrance.fml.org/ for more details.
+0019 #
+0020 import os
+0021 import sys
+0022 import pwd
+0023 import socketserver
+0024 import http.server
+0025 import http.cookies
+0026 import cgi
+0027 import json
+0028 
+0029 
+0030 #
+0031 # Global Configurations
+0032 #
+0033 HTTP_HOST     = "0.0.0.0"
+0034 HTTP_PORT     = 80
+0035 HTDOCS_DIR    = "/home/admin/htdocs"
+0036 INDEX_FILE    = HTDOCS_DIR + "/index.html"
+0037 UPLOADED_FILE = HTDOCS_DIR + "/file.uploaded"
+0038 
+0039 
+0040 
+0041 # WWW server example: Handler class, which handles www requests
+0042 # httpHandler inherits the superclass http.server.SimpleHTTPRequestHandler
+0043 class httpHandler(http.server.SimpleHTTPRequestHandler):
+0044    def __init__(self, *args, **kwargs):
+0045       self.cookie = http.cookies.SimpleCookie()      
+0046       self.cookie["_session"]           = ""
+0047       self.cookie["_session"]["domain"] = "cloud.fml.org"      
+0048       super().__init__(*args, directory=HTDOCS_DIR, **kwargs)
+0049 
+0050    def _set_headers(self, type):
+0051       self.send_response(200)
+0052       self.send_header("Content-type","{}; charset=utf-8".format(type))
+0053       self._set_cors()
+0054       self._set_cookie()
+0055       self.end_headers()
+0056 
+0057    # CORS (Cross-Origin Resource Sharing)
+0058    def _set_cors(self):
+0059       self.send_header("Access-Control-Allow-Origin", "*")
+0060       self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+0061       self.send_header("Access-Control-Allow-Headers", "X-Requested-With, Access-Control-Allow-Origin")
+0062       self.send_header("Access-Control-Allow-Credentials", "true")
+0063 
+0064    # get cookies in Cookie: field sent from WWW client (Browser)
+0065    # - return value: STRING
+0066    def _get_cookie(self):
+0067       if self.headers.get('Cookie'):
+0068          self.cookie.load(self.headers['Cookie'])
+0069       if "_session"  in self.cookie:
+0070          return self.cookie[ "_session" ].value
+0071       else:
+0072          return ""
+0073       
+0074    # set Set-Cookie to send cookie information to the client (WWW Browser)
+0075    def _set_cookie(self):
+0076       self.send_header("Set-Cookie", self.cookie.output(header=""))
+0077 
+0078 
+0079    def do_OPTIONS(self):
+0080       self.send_response(200)
+0081       self._set_cors()
+0082       self.end_headers()
+0083 
+0084 
+0085    def do_GET(self):
+0086       return super().do_GET()
+0087 
+0088 
+0089    def do_POST(self):
+0090       # local variables
+0091       type    = "text/html"      # default Content-Type
+0092       message = "***failed***\n" # string
+0093       form    = cgi.FieldStorage(
+0094          fp=self.rfile,
+0095          headers=self.headers,
+0096          environ={"REQUEST_METHOD": "POST"}
+0097       )
+0098 
+0099       # routing: call the corresponding method for the URL path
+0100       if self.path == "/api/lsform/v1":
+0101          message = self.lsform(form)
+0102       if self.path == "/api/upload/v1":
+0103          message = self.upload(form)
+0104          
+0105       # set the HTTP "Content-Type" header field to type
+0106       self._set_headers(type)
+0107       # return the message (STRING) to the browser
+0108       self.wfile.write(bytes(message, "utf8"))
+0109 
+0110 
+0111    # LSFORM = LiSt FORM key,value(s) as HTML TABLE
+0112    def lsform(self, form):
+0113       msg = ""    # return string
+0114       msg = msg + "<p>list up form values\n"
+0115       msg = msg + "<table border=0 frame=void cellspacing=30>\n"
+0116 
+0117       # check all FORM key,value and create each table row
+0118       keys = sorted(form.keys())
+0119       for key in keys:
+0120          val = form[key].value
+0121          msg = msg + "<tr><td>{}<td>{}</tr>\n".format(key,val)
+0122 
+0123       msg = msg + "</table>\n"
+0124       return msg
+0125 
+0126 
+0127    # UPLOAD: uploaded data is written to UPLOADED_FILE(= /home/admin/htdocs/file.uploaded)
+0128    def upload(self, form):
+0129       count = 0
+0130       with open(UPLOADED_FILE, mode="wb") as fp:
+0131          count = fp.write(form["file"].file.read())
+0132       # exercise: AWS Rekognition extension
+0133       return "uploaded: {} bytes written\n".format(count)
+0134 
+0135 
+0136    # Exercise Template: Janken program web version
+0137    # - hint: kekka = (3 + jibun - aite) % 3
+0138    def janken(self,form):
+0139       pass
+0140 
+0141 
+0142    # Exercise Template: ISBN search
+0143    # - hint: json.dumps() convert DICT to STRING
+0144    def openbd(self,form):
+0145       data = {} # dict
+0146       return json.dumps(data, ensure_ascii=False)
+0147 
+0148 
+0149 
+0150 # www.py specific utilities
+0151 # - If you read this, you must be interested in IT infrastructure ?
+0152 #   Welcome to H205 IT infra club :-)
+0153 # - You do not need to understand this for the lectures.
+0154 class wwwpyUtils:
+0155     def __init__(self):
+0156         pass
+0157 
+0158     def create_hompepage_if_not_found(self, dir = HTDOCS_DIR, file = INDEX_FILE):
+0159        self.mkdir_if_not_found(dir)
+0160 
+0161        if not os.path.exists(file):
+0162           with open(file, mode="x") as fp:
+0163              fp.write("welcome to my homepage\n")
+0164 
+0165     def mkdir_if_not_found(self, dir):
+0166        if not os.path.isdir(dir):
+0167           os.mkdir(dir, mode=0o755)
+0168 
+0169     def set_userenv(self):
+0170        user = os.getenv("SUDO_USER")
+0171        if not user:
+0172           user = os.getlogin()
+0173        p = pwd.getpwnam(user)
+0174        os.seteuid(p.pw_uid)
+0175 
+0176     def get_userenv(self):
+0177        if os.getenv("DEBUG"):
+0178           euid = os.geteuid()
+0179           egid = os.getegid()
+0180           print("(debug) euid={}, egid={}".format(euid,egid))
+0181 
+0182 
+0183 #
+0184 # MAIN
+0185 #
+0186 if __name__ == "__main__":
+0187    # not recommended but may be allowed since this practice is for personal use only.
+0188    socketserver.TCPServer.allow_reuse_address = True
+0189 
+0190    # run python www server (httpd)
+0191    with socketserver.TCPServer((HTTP_HOST, HTTP_PORT), httpHandler) as httpd:
+0192       print("(debug) serving at port", HTTP_PORT, file=sys.stderr)
+0193 
+0194       # - this process runs as "root" under "sudo ..." by default,
+0195       #   which is required to listen 80/tcp.
+0196       # - So, we change back the effective UID to "admin" after 80/tcp open.
+0197       wwwpyUtils().set_userenv()
+0198       wwwpyUtils().get_userenv()
+0199 
+0200       # create "/home/admin/htdocs/index.html" if not exists
+0201       wwwpyUtils().mkdir_if_not_found(HTDOCS_DIR)
+0202       wwwpyUtils().create_hompepage_if_not_found(file=INDEX_FILE)
+0203 
+0204       # run the www server forever (infinite loop)
+0205       httpd.serve_forever()
