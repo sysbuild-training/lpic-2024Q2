@@ -1,4 +1,4 @@
-# LPIC(2024/06/08)用配布物
+# LPI Webinar "ブラウザのフタを開けてHTTP体験しよう" (2024/06/08)用配布物
 
 [![ブラウザのフタを開けてHTTP体験しよう](https://img.youtube.com/vi/y84Asag9O1o/maxresdefault.jpg)](https://www.youtube.com/watch?v=y84Asag9O1o)
 
