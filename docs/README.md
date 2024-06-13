@@ -55,3 +55,5 @@
 
 <hr>
 Last-Modified: 2024/06/13
+<br>
+Copyright (C) 2024 Ken'ichi Fukamachi, CC BY-NC-SA 4.0
