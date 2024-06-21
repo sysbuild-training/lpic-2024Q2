@@ -1,4 +1,4 @@
-# LPI Channel Webinar 2024-06-08, "Uncover your browser and experience how HTTP works"
+# LPI Webinar 2024-06-08, "Uncover your browser and experience how HTTP works"
 
 text, worksheet and templates for the LPI Webinar held on 2024-06-08,
 which is open as an [archived video](https://www.youtube.com/watch?v=y84Asag9O1o) at 
