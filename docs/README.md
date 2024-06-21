@@ -68,6 +68,6 @@ Creative Commons BY-NC-SA [4.0](https://creativecommons.org/licenses/by/4.0/deed
 
 
 <hr>
-Last-Modified: 2024/06/13
+Last-Modified: 2024-06-21
 <br>
 Copyright (C) 2024 Ken'ichi Fukamachi, CC BY-NC-SA 4.0
