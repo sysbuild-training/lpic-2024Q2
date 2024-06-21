@@ -5,6 +5,11 @@ which is open as an [archived video](https://www.youtube.com/watch?v=y84Asag9O1o
 Youtube [LPI Channel video](https://www.youtube.com/@linuxprofessionalinstitute906/videos).
 
 
+## Documents
+
+You can download the Webinar text and worksheets at [here](docs/README.md).
+
+
 ## References
 
 - [【公式】Linux Professional Institute 日本支部 LPI (Youtube)](https://www.youtube.com/@linuxprofessionalinstitute906/videos)
