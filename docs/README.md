@@ -69,6 +69,19 @@
     - どうしてもうまくいかない場合、事前講習会(相談会)に参加してください。相談にのります
 
 
+## リファレンス
+
+- インターネットというかコンピュータ開発史について、ちまちまと書く (スライド P.58)
+    - [「色づかないWorld-Wide-Webの昨日から」シリーズ qiita版 (オリジナルの縮約版)](https://qiita.com/tags/%e8%89%b2%e3%81%a5%e3%81%8b%e3%81%aa%e3%81%84world-wide-web%e3%81%ae%e6%98%a8%e6%97%a5%e3%81%8b%e3%82%89)
+    - [「色づかないWorld-Wide-Webの昨日から」シリーズ (オリジナル)](https://technotes.fml.org/tags/%E8%89%B2%E3%81%A5%E3%81%8B%E3%81%AA%E3%81%84world-wide-web%E3%81%AE%E6%98%A8%E6%97%A5%E3%81%8B%E3%82%89/)
+    - フリーソフトウエア運動の40年 ([序章部分](https://cist.repo.nii.ac.jp/records/736)) ([第1章](https://cist.repo.nii.ac.jp/records/2000009))
+- さまざまなリンク
+    - [ホームページ(www.fml.org)](https://www.fml.org/)
+    - [github(@fmlorg)](https://github.com/fmlorg/)
+    - [twitter](https://twitter.com/fukachan_fmlorg)
+    - [自分の全授業のスライド群(lectures.fml.org)](https://lectures.fml.org/)
+
+
 ## ライセンス
 
 Creative Commons BY-NC-SA [4.0](https://creativecommons.org/licenses/by/4.0/deed.ja) に沿って御利用ください
