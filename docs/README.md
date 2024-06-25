@@ -5,7 +5,9 @@
 ## 本Webinarについて
 
 [公立千歳科学技術大学](https://www.chitose.ac.jp/)
-情報システム工学科3年生の「実務を全力でやるITインフラストラクチャ演習群」からの抜粋になっています。
+情報システム工学科3年生の
+[「実務を全力でやるITインフラストラクチャ演習群」](https://unix-entrance.fml.org/slides/syllabus/sysbuild/2023/)
+からの抜粋になっています。
 また、
 本動画は<B>「自習教材」兼「模擬演習」</B>として作られています。
 自習の場合、演習環境は付録Bを参考に構築してください。
@@ -71,6 +73,9 @@
 
 ## リファレンス
 
+- 実務を全力でやるITインフラストラクチャ演習群の授業設計について
+    - [「ITインフラ修行のための通年授業設計の一例」](https://unix-entrance.fml.org/slides/syllabus/sysbuild/2023/)
+      (AWS Academyユーザ会,2023-08-18,恵比寿)
 - インターネットというかコンピュータ開発史について、ちまちまと書く (スライド P.58)
     - [「色づかないWorld-Wide-Webの昨日から」シリーズ qiita版 (オリジナルの縮約版)](https://qiita.com/tags/%e8%89%b2%e3%81%a5%e3%81%8b%e3%81%aa%e3%81%84world-wide-web%e3%81%ae%e6%98%a8%e6%97%a5%e3%81%8b%e3%82%89)
     - [「色づかないWorld-Wide-Webの昨日から」シリーズ (オリジナル)](https://technotes.fml.org/tags/%E8%89%B2%E3%81%A5%E3%81%8B%E3%81%AA%E3%81%84world-wide-web%E3%81%AE%E6%98%A8%E6%97%A5%E3%81%8B%E3%82%89/)
